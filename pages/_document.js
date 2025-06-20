@@ -15,6 +15,12 @@ export default function Document() {
           }}
         />
         {/* End Google Tag Manager */}
+
+        {/* Favicon padrão */}
+        <link rel="icon" href="/favicon.ico" />
+        {/* Opcional: favicon SVG pra browser moderno */}
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
       </Head>
       <body>
         {/* Google Tag Manager (noscript) */}
