@@ -1,0 +1,26 @@
+import { supabase } from "../../../lib/supabaseServer";
+
+export default async function handler(req, res) {
+  if (req.method !== "POST")
+    return res.status(405).json({ error: "Método não permitido" });
+
+  const { email, password, confirmPassword } = req.body;
+
+  if (!email || !password || !confirmPassword)
+    return res.status(400).json({ error: "Todos os campos são obrigatórios" });
+
+  if (password !== confirmPassword)
+    return res.status(400).json({ error: "Senhas diferentes" });
+
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/verify-email`,
+    },
+  });
+
+  if (error) return res.status(400).json({ error: error.message });
+
+  return res.status(200).json({ success: true, user: data.user });
+}
