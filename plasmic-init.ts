@@ -2,7 +2,7 @@ import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
 
 // IMPORTA OS DOIS CLIENTES SUPABASE
 import { supabaseCompany } from "./c-supabaseClient";
-import { supabaseAcademy } from "./a-supabaseClient";
+import { supabaseAgency } from "./a-supabaseClient";
 
 export const PLASMIC = initPlasmicLoader({
   projects: [
@@ -28,7 +28,7 @@ PLASMIC.registerGlobalContext("supabase", () => {
 
     // Rota da Academy
     if (path.startsWith("/a-")) {
-      return supabaseAcademy;
+      return supabaseAgency;
     }
   }
 
