@@ -1,25 +1,39 @@
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
 
+// IMPORTA OS DOIS CLIENTES SUPABASE
+import { supabaseCompany } from "./c-supabaseClient";
+import { supabaseAcademy } from "./a-supabaseClient";
+
 export const PLASMIC = initPlasmicLoader({
   projects: [
     {
       id: "nQPazWnnjAGkrcpJaKckz8",
-      token: "d2Q6R1SVggP0symutiYM6OUwXTOFasmz2YBq1uR6Y6YWdmqXcYkHu9Q63777GIquHvgnBVZi3EjnHKV7zqw",
+      token:
+        "d2Q6R1SVggP0symutiYM6OUwXTOFasmz2YBq1uR6Y6YWdmqXcYkHu9Q63777GIquHvgnBVZi3EjnHKV7zqw",
     },
   ],
-
-  // By default Plasmic will use the last published version of your project.
-  // For development, you can set preview to true, which will use the unpublished
-  // project, allowing you to see your designs without publishing.  Please
-  // only use this for development, as this is significantly slower.
   preview: false,
 });
 
-// You can register any code components that you want to use here; see
-// https://docs.plasmic.app/learn/code-components-ref/
-// And configure your Plasmic project to use the host url pointing at
-// the /plasmic-host page of your nextjs app (for example,
-// http://localhost:3000/plasmic-host).  See
-// https://docs.plasmic.app/learn/app-hosting/#set-a-plasmic-project-to-use-your-app-host
+// 🔥 REGISTRA O CONTEXTO GLOBAL PARA O SUPABASE DE FORMA DINÂMICA
+PLASMIC.registerGlobalContext("supabase", () => {
+  // Só roda no navegador
+  if (typeof window !== "undefined") {
+    const path = window.location.pathname;
+
+    // Rota da Company
+    if (path.startsWith("/c-")) {
+      return supabaseCompany;
+    }
+
+    // Rota da Academy
+    if (path.startsWith("/a-")) {
+      return supabaseAcademy;
+    }
+  }
+
+  // fallback geral (caso raro)
+  return supabaseCompany;
+});
 
 // PLASMIC.registerComponent(...);
