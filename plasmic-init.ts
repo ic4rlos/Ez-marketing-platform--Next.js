@@ -1,12 +1,5 @@
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
 
-// IMPORTA OS DOIS CLIENTES SUPABASE
-import { supabaseCompany } from "./lib/c-supabaseClient";
-import { supabaseAgency } from "./lib/a-supabaseClient";
-
-// IMPORTA O NOVO PROVIDER GLOBAL QUE CRIAMOS
-import { SupabaseProvider } from "./lib/SupabaseContext";
-
 export const PLASMIC = initPlasmicLoader({
   projects: [
     {
@@ -17,11 +10,6 @@ export const PLASMIC = initPlasmicLoader({
   ],
   preview: false,
 });
-
-// ❗ AGORA REGISTRAMOS O PROVIDER CORRETAMENTE
-//   Sem strings. Sem funções. Nada de API errada.
-//   Isso é 100% suportado pelo Plasmic.
-PLASMIC.registerGlobalContext(SupabaseProvider);
 
 // PLASMIC.registerComponent(...);
 
