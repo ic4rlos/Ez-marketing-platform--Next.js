@@ -1,8 +1,8 @@
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
 
 // IMPORTA OS DOIS CLIENTES SUPABASE
-import { supabaseCompany } from "./c-supabaseClient";
-import { supabaseAgency } from "./a-supabaseClient";
+import { supabaseCompany } from "./lib/c-supabaseClient";
+import { supabaseAgency } from "./lib/a-supabaseClient";
 
 export const PLASMIC = initPlasmicLoader({
   projects: [
