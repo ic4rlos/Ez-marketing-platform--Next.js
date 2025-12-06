@@ -31,6 +31,3 @@ PLASMIC.registerComponent(SupabaseForm, {
     where: "object",
   },
 });
-
-
-});
