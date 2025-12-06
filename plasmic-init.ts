@@ -1,5 +1,10 @@
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
 
+// 🔽 Novas importações
+import SupabaseUserSession from "./components/SupabaseUserSession";
+import SupabaseForm from "./components/SupabaseForm";
+import PokedexLookup from "./components/PokedexLookup";
+
 export const PLASMIC = initPlasmicLoader({
   projects: [
     {
@@ -11,5 +16,25 @@ export const PLASMIC = initPlasmicLoader({
   preview: false,
 });
 
-// PLASMIC.registerComponent(...);
+// 🔽 Registro dos novos componentes
+PLASMIC.registerComponent(SupabaseUserSession, {
+  name: "SupabaseUserSession",
+  props: {},
+});
 
+PLASMIC.registerComponent(SupabaseForm, {
+  name: "SupabaseForm",
+  props: {
+    table: "string",
+    action: "string",
+    payload: "object",
+    where: "object",
+  },
+});
+
+PLASMIC.registerComponent(PokedexLookup, {
+  name: "PokedexLookup",
+  props: {
+    name: "string",
+  },
+});
