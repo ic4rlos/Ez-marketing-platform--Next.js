@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, ReactNode } from "react";
 import { supabaseCompany } from "../lib/c-supabaseClient";
 
-export default function SupabaseUserSession({ children }) {
-  const [user, setUser] = useState(null);
+interface SupabaseUserSessionProps {
+  children?: ReactNode;
+}
+
+export default function SupabaseUserSession({
+  children,
+}: SupabaseUserSessionProps) {
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
     async function load() {
       const { data } = await supabaseCompany.auth.getSession();
-      setUser(data.session?.user || null);
+      setUser(data?.session?.user ?? null);
     }
     load();
   }, []);
