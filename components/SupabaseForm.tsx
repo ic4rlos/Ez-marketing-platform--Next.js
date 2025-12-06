@@ -1,7 +1,6 @@
 import React, { ReactNode, FormEvent } from "react";
 import { supabaseCompany } from "../lib/c-supabaseClient";
 
-// Tipagem das props para evitar erro na Vercel
 interface SupabaseFormProps {
   children?: ReactNode;
   table: string;
@@ -25,14 +24,26 @@ export default function SupabaseForm({
     e.preventDefault();
 
     try {
-      let res;
+      let res:
+        | { data: any; error: any }
+        | { data?: null; error?: null }
+        | undefined = undefined;
 
       if (action === "insert") {
         res = await supabaseCompany.from(table).insert(payload);
       } else if (action === "update") {
-        res = await supabaseCompany.from(table).update(payload).match(where);
+        res = await supabaseCompany.from(table)
+          .update(payload)
+          .match(where ?? {});
       } else if (action === "delete") {
-        res = await supabaseCompany.from(table).delete().match(where);
+        res = await supabaseCompany.from(table)
+          .delete()
+          .match(where ?? {});
+      }
+
+      // 🚨 Garantia absoluta para o TypeScript
+      if (!res) {
+        throw new Error("Supabase returned no response.");
       }
 
       if (res.error) {
@@ -41,11 +52,12 @@ export default function SupabaseForm({
       }
 
       onSuccess?.(res.data);
-    } catch (err) {
+    } catch (err: any) {
       onError?.(err);
     }
   }
 
   return <form onSubmit={handleSubmit}>{children}</form>;
 }
+
 
