@@ -1,5 +1,16 @@
-import React from "react";
+import React, { ReactNode, FormEvent } from "react";
 import { supabaseCompany } from "../lib/c-supabaseClient";
+
+// Tipagem das props para evitar erro na Vercel
+interface SupabaseFormProps {
+  children?: ReactNode;
+  table: string;
+  action: "insert" | "update" | "delete";
+  payload?: any;
+  where?: any;
+  onSuccess?: (data: any) => void;
+  onError?: (err: any) => void;
+}
 
 export default function SupabaseForm({
   children,
@@ -9,8 +20,8 @@ export default function SupabaseForm({
   where,
   onSuccess,
   onError,
-}) {
-  async function handleSubmit(e) {
+}: SupabaseFormProps) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     try {
@@ -37,3 +48,4 @@ export default function SupabaseForm({
 
   return <form onSubmit={handleSubmit}>{children}</form>;
 }
+
