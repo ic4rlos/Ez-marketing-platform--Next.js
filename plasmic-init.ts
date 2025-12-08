@@ -33,7 +33,7 @@ PLASMIC.registerComponent(CorporativeSupabaseForm, {
 });
 
 // 🔽 Registrar o contexto global de usuário
-PLASMIC.registerGlobalContext(SupabaseUserSession, {
-  name: "UserSession",
+PLASMIC.registerGlobalContext(CorporativeUserSession, {
+  name: "C-UserSession",
   props: {},
 });
