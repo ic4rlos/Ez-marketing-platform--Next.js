@@ -18,13 +18,13 @@ export const PLASMIC = initPlasmicLoader({
 });
 
 // 🔽 Registro dos novos componentes
-PLASMIC.registerComponent(SupabaseUserSession, {
-  name: "SupabaseUserSession",
+PLASMIC.registerComponent(CorporativeUserSession, {
+  name: "CorporativeUserSession",
   props: {},
 });
 
-PLASMIC.registerComponent(SupabaseForm, {
-  name: "SupabaseForm",
+PLASMIC.registerComponent(CorporativeSupabaseForm, {
+  name: "CorporativeSupabaseForm",
   props: {
     table: "string",
     action: "string",
@@ -33,8 +33,8 @@ PLASMIC.registerComponent(SupabaseForm, {
   },
 });
 // 🔽 Registrar o contexto global de usuário
-PLASMIC.registerGlobalContext(SupabaseUserSession, {
-  name: "UserSession",
+PLASMIC.registerGlobalContext(CorporativeUserSession, {
+  name: "CorporativeUserSession",
   props: {},
 });
 
