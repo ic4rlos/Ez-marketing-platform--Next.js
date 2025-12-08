@@ -1,8 +1,9 @@
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
 
 // 🔽 Novas importações
-import SupabaseUserSession from "./components/SupabaseUserSession";
-import SupabaseForm from "./components/SupabaseForm";
+import CorporativeUserSession from "./components/CorporativeUserSession";
+import CorporativeSupabaseForm from "./components/CorporativeSupabaseForm";
+
 
 
 export const PLASMIC = initPlasmicLoader({
