@@ -31,3 +31,9 @@ PLASMIC.registerComponent(SupabaseForm, {
     where: "object",
   },
 });
+// 🔽 Registrar o contexto global de usuário
+PLASMIC.registerGlobalContext(SupabaseUserSession, {
+  name: "UserSession",
+  props: {},
+});
+
