@@ -1,7 +1,9 @@
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
 
+// 🔽 Novas importações
 import CorporativeUserSession from "./components/CorporativeUserSession";
 import CorporativeSupabaseForm from "./components/CorporativeSupabaseForm";
+
 
 export const PLASMIC = initPlasmicLoader({
   projects: [
@@ -14,7 +16,12 @@ export const PLASMIC = initPlasmicLoader({
   preview: false,
 });
 
-// 🔽 Apenas O FORM é um component regular
+// 🔽 Registro dos novos componentes
+PLASMIC.registerComponent(CorporativeUserSession, {
+  name: "CorporativeUserSession",
+  props: {},
+});
+
 PLASMIC.registerComponent(CorporativeSupabaseForm, {
   name: "CorporativeSupabaseForm",
   props: {
@@ -25,9 +32,8 @@ PLASMIC.registerComponent(CorporativeSupabaseForm, {
   },
 });
 
-// 🔽 Apenas A USER SESSION é GlobalContext
-PLASMIC.registerGlobalContext(CorporativeUserSession, {
-  name: "CorporativeUserSession",
+// 🔽 Registrar o contexto global de usuário
+PLASMIC.registerGlobalContext(SupabaseUserSession, {
+  name: "UserSession",
+  props: {},
 });
-
-
