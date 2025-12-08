@@ -1,26 +1,39 @@
-import React, { useEffect, useState, ReactNode } from "react";
+import React, { useEffect, useState, ReactNode, createContext } from "react";
 import { supabaseCompany } from "../lib/c-supabaseClient";
 
-interface SupabaseUserSessionProps {
+export const UserContext = createContext<any>(null);
+
+interface Props {
   children?: ReactNode;
 }
 
-export default function SupabaseUserSession({
-  children,
-}: SupabaseUserSessionProps) {
+export default function SupabaseUserSession({ children }: Props) {
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-    async function load() {
-      const { data } = await supabaseCompany.auth.getSession();
+    // 1) Carrega sessão atual
+    supabaseCompany.auth.getSession().then(({ data }) => {
       setUser(data?.session?.user ?? null);
-    }
-    load();
+    });
+
+    // 2) Escuta mudanças no login/logout
+    const { data: listener } = supabaseCompany.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    return () => {
+      listener.subscription.unsubscribe();
+    };
   }, []);
 
   return (
-    <div data-plasmic-user={user ? "logged" : "anonymous"}>
-      {children}
-    </div>
+    <UserContext.Provider value={user}>
+      <div data-plasmic-user={user ? "logged" : "anonymous"}>
+        {children}
+      </div>
+    </UserContext.Provider>
   );
 }
+
