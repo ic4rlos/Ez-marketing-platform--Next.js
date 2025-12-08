@@ -32,8 +32,9 @@ PLASMIC.registerComponent(CorporativeSupabaseForm, {
   },
 });
 
-// 2) Registrar o USER SESSION como GLOBAL CONTEXT
 PLASMIC.registerGlobalContext(CorporativeUserSession, {
   name: "CorporativeUserSession",
+  props: {},   // <- OBRIGATÓRIO, mesmo vazio
 });
+
 
