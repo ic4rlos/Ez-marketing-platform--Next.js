@@ -14,21 +14,9 @@ export const PLASMIC = initPlasmicLoader({
   preview: false,
 });
 
-/*  
-  🔥 REGRAS IMPORTANTES:
-  - CorporativeUserSession deve ser registrado APENAS como GlobalContext
-  - CorporativeSupabaseForm deve ser registrado APENAS como Component
-  - Os nomes usados no "name:" DEVEM ser UNIQUE e CONSTANTES
-*/
-
-// 1) Registrar o FORM como COMPONENT NORMAL
 PLASMIC.registerComponent(CorporativeSupabaseForm, {
   name: "CorporativeSupabaseForm",
   props: {
-    children: {
-      type: "slot",
-      hidePlaceholder: true
-    },
     table: "string",
     action: "string",
     payload: "object",
@@ -38,7 +26,7 @@ PLASMIC.registerComponent(CorporativeSupabaseForm, {
 
 PLASMIC.registerGlobalContext(CorporativeUserSession, {
   name: "CorporativeUserSession",
-  props: {},   // <- OBRIGATÓRIO, mesmo vazio
+  props: {},
 });
 
 
