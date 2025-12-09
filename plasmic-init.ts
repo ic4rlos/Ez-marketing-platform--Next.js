@@ -25,6 +25,10 @@ export const PLASMIC = initPlasmicLoader({
 PLASMIC.registerComponent(CorporativeSupabaseForm, {
   name: "CorporativeSupabaseForm",
   props: {
+    children: {
+      type: "slot",
+      hidePlaceholder: true
+    },
     table: "string",
     action: "string",
     payload: "object",
