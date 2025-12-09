@@ -12,3 +12,6 @@ export default function Host() {
   return <PlasmicCanvasHost />;
 }
 
+export default function PlasmicHost() {
+  throw new Error("TESTANDO O DEPLOY — ISSO DEVE ESTOURAR");
+}
