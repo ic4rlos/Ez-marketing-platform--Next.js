@@ -1,19 +1,14 @@
-import * as React from "react";
-import { PlasmicCanvasHost } from "@plasmicapp/loader-nextjs";
 import { PLASMIC } from "@/plasmic-init";
+import { PlasmicCanvasHost } from "@plasmicapp/loader-nextjs";
+import React from "react";
 
-export default function PlasmicHost() {
-  return (
-    <>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.PLASMIC_PREVIEW = { user: "debug" };
-          `,
-        }}
-      />
-      <PlasmicCanvasHost />
-    </>
-  );
+export async function getServerSideProps() {
+  // ⚡ Isso força o Next a carregar o PLASMIC e registrar os componentes
+  await PLASMIC.maybeFetchComponentData("/");
+  return { props: {} };
+}
+
+export default function Host() {
+  return <PlasmicCanvasHost />;
 }
 
