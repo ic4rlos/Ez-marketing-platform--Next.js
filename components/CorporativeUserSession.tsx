@@ -7,7 +7,7 @@ interface Props {
   children?: ReactNode;
 }
 
-export default function SupabaseUserSession({ children }: Props) {
+export default function CorporativeUserSession({ children }: Props) {
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
