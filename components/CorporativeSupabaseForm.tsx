@@ -11,7 +11,7 @@ interface SupabaseFormProps {
   onError?: (err: any) => void;
 }
 
-export default function SupabaseForm({
+export default function CorporativeSupabaseForm({
   children,
   table,
   action,
